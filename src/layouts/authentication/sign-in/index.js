@@ -66,11 +66,13 @@ function Basic() {
       redirect: "follow",
     };
 
-    fetch("http://39.57.142.117:4000/login", requestOptions)
+    fetch("http://192.168.10.5:4000/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result?.token) {
           navigate("/tables", { replace: true });
+        } else {
+          alert("Wrong Username or password");
         }
       })
       .catch((error) => console.log("error", error));

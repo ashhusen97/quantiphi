@@ -4,6 +4,7 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
+cors = require("cors");
 //   User = require("./models/user");
 
 // mongoose.set("useNewUrlParser", true);
@@ -80,8 +81,7 @@ app.post(
   //     failureRedirect: "/login",
   //   }),
   function (req, res) {
-    console.log(req);
-    if (req.body.username === "admin" && req.body.password === "admin123") {
+    if (req.body.username === "admin@gmail.com" && req.body.password === "admin123") {
       res.status(200).json({ message: "success", token: req.body });
     } else {
       res.status(400).json({ message: "Invalid Credential" });
