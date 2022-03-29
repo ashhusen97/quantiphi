@@ -4,6 +4,7 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
+
 cors = require("cors");
 //   User = require("./models/user");
 
@@ -14,6 +15,7 @@ cors = require("cors");
 // mongoose.connect("mongodb://localhost/auth_demo_app");
 
 var app = express();
+var users = [];
 app.use(bodyParser.json());
 app.use(cors());
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,18 +56,17 @@ app.get("/register", function (req, res) {
 
 // Handling user signup
 app.post("/register", function (req, res) {
-  var username = req.body.username;
+  var email = req.body.email;
   var password = req.body.password;
-  User.register(new User({ username: username }), password, function (err, user) {
-    if (err) {
-      console.log(err);
-      return res.render("register");
-    }
-
-    passport.authenticate("local")(req, res, function () {
-      res.render("secret");
-    });
+  var username = req.body.email;
+  users = [];
+  users.push({
+    email,
+    password,
+    username,
   });
+
+  res.status(200).json({ message: "success", token: { email, password, username } });
 });
 
 //Showing login form
@@ -81,11 +82,22 @@ app.post(
   //     failureRedirect: "/login",
   //   }),
   function (req, res) {
-    if (req.body.username === "admin@gmail.com" && req.body.password === "admin123") {
-      res.status(200).json({ message: "success", token: req.body });
+    // console.log(users);
+    let user = users.find((x) => {
+      return x.email === req.body.username && x.password === req.body.password;
+    });
+
+    console.log(user);
+    if (user) {
+      res.status(200).json({ message: "success", token: user });
     } else {
       res.status(400).json({ message: "Invalid Credential" });
     }
+    // if (req.body.username === "admin@gmail.com" && req.body.password === "admin123") {
+    //   res.status(200).json({ message: "success", token: req.body });
+    // } else {
+    //   res.status(400).json({ message: "Invalid Credential" });
+    // }
   }
 );
 
