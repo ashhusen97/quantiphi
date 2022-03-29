@@ -138,15 +138,19 @@ function AddData() {
                     <MDInput variant="outlined" label="Service Account Keys" fullWidth />
                   </Grid>
                   <Grid item xs={12} xl={6}>
-                    <MDButton
-                      fullWidth
-                      variant="gradient"
-                      color="info"
-                      size="large"
-                      onClick={() => setIsOpen(!modalIsOpen)}
-                    >
-                      Proceed
-                    </MDButton>
+                    <Link to="/">
+                      <MDButton
+                        fullWidth
+                        variant="gradient"
+                        color="info"
+                        size="large"
+                        onClick={() => {
+                          setIsOpen(!modalIsOpen);
+                        }}
+                      >
+                        Proceed
+                      </MDButton>
+                    </Link>
                   </Grid>
                 </Grid>
               </Grid>

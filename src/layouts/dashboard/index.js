@@ -25,6 +25,7 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
+import DoughnutChart from "examples/Charts/DoughnutCharts/DefaultDoughnutChart";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
 
 // Data
@@ -34,6 +35,8 @@ import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 // Dashboard components
 import Projects from "layouts/dashboard/components/Projects";
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+import reportdoughnutchart from "./data/reportdoughnutchart";
+import MDTypography from "components/MDTypography";
 
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
@@ -42,120 +45,92 @@ function Dashboard() {
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox py={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
+        <MDBox mt={4.5}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={7}>
+              <MDBox mb={3}>
+                <DoughnutChart
+                  color="primary"
+                  title="Assets distribution by size in (GIB) & Type"
+                  // description="Last Campaign Performance"
+                  // date="campaign sent 2 days ago"
+                  chart={reportdoughnutchart}
+                />
+              </MDBox>
+            </Grid>
+            <Grid item xs={12} md={6} lg={5}>
+              <MDBox mb={3} style={{ backgroundColor: "gray", borderRadius: 20, padding: 10 }}>
+                <MDTypography>Total Assets Proceed</MDTypography>
+                <MDTypography variant="h2">936</MDTypography>
+              </MDBox>
+              <Grid container>
+                <Grid item xs={12} md={6} lg={6}>
+                  <MDBox mb={3} style={{ backgroundColor: "gray", borderRadius: 20, padding: 10 }}>
+                    <MDTypography>Unique Assets Proceed</MDTypography>
+                    <MDTypography variant="h2">936</MDTypography>
+                  </MDBox>
+                </Grid>
+                <Grid item xs={12} md={6} lg={6} style={{ paddingLeft: 10 }}>
+                  <MDBox mb={3} style={{ backgroundColor: "gray", borderRadius: 20, padding: 10 }}>
+                    <MDTypography>Duplicate Assets</MDTypography>
+                    <MDTypography variant="h2">936</MDTypography>
+                  </MDBox>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </MDBox>
+
+        <Grid container spacing={3} style={{ marginTop: 10 }}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="dark"
                 icon="weekend"
-                title="Bookings"
-                count={281}
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
-                }}
+                title="Annual Storage Cost Pre"
+                count={281421}
+                // percentage={{
+                //   color: "success",
+                //   amount: "+55%",
+                //   label: "than lask week",
+                // }}
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
+                title="Annual Storage Cost Pre"
+                count={281421}
+                // percentage={{
+                //   color: "success",
+                //   amount: "+3%",
+                //   label: "than last month",
+                // }}
               />
             </MDBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={3}>
+          <Grid item xs={12} md={6} lg={4}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
                 icon="store"
-                title="Revenue"
-                count="34k"
-                percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="Followers"
-                count="+91"
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
+                title="Annual Storage Cost Pre"
+                count={281421}
               />
             </MDBox>
           </Grid>
         </Grid>
-        <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
         <MDBox>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
+            <Grid item xs={12} md={6} lg={12}>
               <Projects />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
             </Grid>
           </Grid>
         </MDBox>
       </MDBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }

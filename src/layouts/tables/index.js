@@ -32,17 +32,19 @@ import authorsTableData from "layouts/tables/data/authorsTableData";
 import projectsTableData from "layouts/tables/data/projectsTableData";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Tables() {
   const { columns, rows } = authorsTableData();
   const { columns: pColumns, rows: pRows } = projectsTableData();
+  const [hidden, setHidden] = useState(false);
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
-          <Grid item xs={8}>
+          <Grid item xs={!hidden ? 12 : 9}>
             <Card>
               <MDBox
                 mx={2}
@@ -55,7 +57,7 @@ function Tables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Assets Management
+                  {!hidden ? "Assets Management" : "Data Proccessing "}
                 </MDTypography>
                 <Link
                   variant="contained"
@@ -64,9 +66,24 @@ function Tables() {
                 >
                   Add New
                 </Link>
+                <Link to={"/dashboard"}>
+                  <Button
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      backgroundColor: "#fff",
+                      marginRight: 40,
+                    }}
+                  >
+                    DashBoard
+                  </Button>
+                </Link>
               </MDBox>
               <MDBox pt={3}>
                 <DataTable
+                  onClick={() => {
+                    setHidden(!hidden);
+                  }}
                   canSearch
                   table={{ columns, rows }}
                   isSorted={false}
@@ -76,37 +93,91 @@ function Tables() {
                 />
               </MDBox>
             </Card>
+            <Grid container>
+              <Grid item xs={8}>
+                <Button style={{ backgroundColor: "#fff", marginTop: 10 }} fullWidth>
+                  Filter
+                </Button>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  style={{ backgroundColor: "#fff", marginTop: 10, width: "95%", marginLeft: 20 }}
+                >
+                  Process
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={4}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
+          {hidden && (
+            <Grid item xs={3}>
+              <Card>
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
+                  <MDTypography variant="h6" color="white">
+                    Projects
+                  </MDTypography>
+                </MDBox>
+                <MDBox pt={3}>
+                  <MDTypography variant="h2" color="white" style={{ marginLeft: 20 }}>
+                    230
+                  </MDTypography>
+                </MDBox>
+              </Card>
+              <Card style={{ marginTop: 50 }}>
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
+                  <MDTypography variant="h6" color="white">
+                    Data Status
+                  </MDTypography>
+                </MDBox>
+                <MDBox pt={3}>
+                  <MDTypography variant="h2" color="white" style={{ marginLeft: 20 }}>
+                    70%
+                  </MDTypography>
+                </MDBox>
+              </Card>
+              <Card style={{ marginTop: 50 }}>
+                <MDBox
+                  mx={2}
+                  mt={-3}
+                  py={3}
+                  px={2}
+                  variant="gradient"
+                  bgColor="info"
+                  borderRadius="lg"
+                  coloredShadow="info"
+                >
+                  <MDTypography variant="h6" color="white">
+                    Projects
+                  </MDTypography>
+                </MDBox>
+                <MDBox pt={3}>
+                  <MDTypography variant="h2" color="white" style={{ marginLeft: 20 }}>
+                    70%
+                  </MDTypography>
+                </MDBox>
+              </Card>
+            </Grid>
+          )}
         </Grid>
       </MDBox>
-      <Footer />
+      {/* <Footer /> */}
     </DashboardLayout>
   );
 }
