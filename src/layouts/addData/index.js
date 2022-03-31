@@ -43,12 +43,37 @@ const customStyles = {
     bottom: "auto",
     marginRight: "10%",
     transform: "translate(-50%, -50%)",
+    backgroundColor: "transparent",
   },
 };
 
 function AddData() {
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [bname, setBname] = useState("");
+  const [pid, setPid] = useState("");
+  const [aname, setAname] = useState("");
+  const [akey, setAKey] = useState("");
+
+  const submit = () => {
+    const obj = {
+      bucketName: bname,
+      BucketId: pid,
+      AccountName: aname,
+      Accountkey: akey,
+    };
+    var retrievedData = localStorage.getItem("data");
+    var newArray = [];
+    var parsed = JSON.parse(retrievedData);
+    if (parsed) {
+      newArray = [...parsed, { obj }];
+    } else {
+      newArray.push(obj);
+    }
+
+    localStorage.setItem("data", JSON.stringify(newArray));
+    window.location.href = "/tables";
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar absolute isMini />
@@ -121,36 +146,66 @@ function AddData() {
                 item
                 xs={12}
                 lg={12}
-                style={{ background: "white", paddingBottom: 30, paddingRight: 30 }}
+                style={{
+                  background: "black",
+                  paddingBottom: 30,
+                  paddingRight: 30,
+                  borderRadius: 10,
+                  margin: 10,
+                }}
               >
-                <h3>New GCP Cloud Bucket</h3>
+                <h3 style={{ color: "#fff", margin: "20px 0px" }}>New GCP Cloud Bucket</h3>
                 <Grid container spacing={3}>
                   <Grid item xs={12} xl={6}>
-                    <MDInput variant="outlined" label="Bucket Name" fullWidth />
+                    <MDInput
+                      placeHolder="Bucket Name"
+                      variant="outlined"
+                      label="Bucket Name"
+                      fullWidth
+                      value={bname}
+                      onChange={(e) => setBname(e.target.value)}
+                    />
                   </Grid>
                   <Grid item xs={12} xl={6}>
-                    <MDInput variant="outlined" label="Project ID" fullWidth />
+                    <MDInput
+                      variant="outlined"
+                      label="Project ID"
+                      fullWidth
+                      value={pid}
+                      onChange={(e) => setPid(e.target.value)}
+                    />
                   </Grid>
                   <Grid item xs={12} xl={6}>
-                    <MDInput variant="outlined" label="Service Account Name" fullWidth />
+                    <MDInput
+                      variant="outlined"
+                      label="Service Account Name"
+                      fullWidth
+                      value={aname}
+                      onChange={(e) => setAname(e.target.value)}
+                    />
                   </Grid>
                   <Grid item xs={12} xl={6}>
-                    <MDInput variant="outlined" label="Service Account Keys" fullWidth />
+                    <MDInput
+                      variant="outlined"
+                      label="Service Account Keys"
+                      fullWidth
+                      value={akey}
+                      onChange={(e) => setAKey(e.target.value)}
+                    />
                   </Grid>
                   <Grid item xs={12} xl={6}>
-                    <Link to="/">
-                      <MDButton
-                        fullWidth
-                        variant="gradient"
-                        color="info"
-                        size="large"
-                        onClick={() => {
-                          setIsOpen(!modalIsOpen);
-                        }}
-                      >
-                        Proceed
-                      </MDButton>
-                    </Link>
+                    <MDButton
+                      fullWidth
+                      variant="gradient"
+                      color="info"
+                      size="large"
+                      onClick={() => {
+                        submit();
+                        setIsOpen(!modalIsOpen);
+                      }}
+                    >
+                      Proceed
+                    </MDButton>
                   </Grid>
                 </Grid>
               </Grid>

@@ -26,7 +26,6 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 import { Checkbox } from "@mui/material";
-import { Link } from "react-router-dom";
 
 export default function data() {
   const data1 = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
@@ -66,11 +65,7 @@ export default function data() {
       console.log(x);
       return {
         check: <Checkbox />,
-        author: (
-          <Link to={`/details:${x.bucketName}`}>
-            <Author image={team2} name={x.bucketName} />{" "}
-          </Link>
-        ),
+        author: <Author image={team2} name={x.bucketName} />,
         function: <Job title="Manager" description="Organization" />,
         status: (
           <MDBox ml={-1}>

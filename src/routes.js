@@ -50,6 +50,7 @@ import Icon from "@mui/material/Icon";
 import AddData from "layouts/addData";
 import Gcp from "layouts/gcp";
 import Review from "layouts/Review";
+import Details from "layouts/details";
 
 const routes = [
   {
@@ -109,6 +110,14 @@ const routes = [
     icon: <Icon fontSize="small">notifications</Icon>,
     route: "/gcp",
     component: <Gcp />,
+  },
+  {
+    type: "link",
+    name: "details",
+    key: "gcp",
+    icon: <Icon fontSize="small">notifications</Icon>,
+    route: "/details:bucketId",
+    component: <Details />,
   },
   // {
   //   type: "collapse",
