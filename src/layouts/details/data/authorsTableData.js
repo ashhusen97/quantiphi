@@ -52,40 +52,30 @@ export default function data() {
 
   return {
     columns: [
-      { accessor: "check", align: "left" },
-      { Header: "Dataset Name", accessor: "author", width: "25%", align: "left" },
-      { Header: "No. of Files", accessor: "function", align: "left" },
+      { Header: "File size", accessor: "function", align: "left" },
       { Header: "Data size", accessor: "status", align: "center" },
-      { Header: "Creation Date", accessor: "employed", align: "center" },
+      { Header: "No of Duplicates", accessor: "employed", align: "center" },
       { Header: "Source", accessor: "action", align: "center" },
-      { Header: "Status", accessor: "status2", align: "center" },
     ],
 
     rows: data1?.map((x) => {
       console.log(x);
       return {
-        check: <Checkbox />,
-        author: <Author image={team2} name={x.bucketName} />,
-        function: <Job title="Manager" description="Organization" />,
+        function: <Job title="10" />,
         status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="online" color="success" variant="gradient" size="sm" />
-          </MDBox>
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            2220
+          </MDTypography>
         ),
         employed: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            23/04/18
+            5
           </MDTypography>
         ),
         action: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            Edit
+            URL{" "}
           </MDTypography>
-        ),
-        status2: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent="60%" color="success" variant="gradient" size="sm" name="60%" />
-          </MDBox>
         ),
       };
     }),
