@@ -29,6 +29,7 @@ import { Checkbox } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function data() {
+  // localStorage.removeItem("data");
   const data1 = localStorage.getItem("data") ? JSON.parse(localStorage.getItem("data")) : [];
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
